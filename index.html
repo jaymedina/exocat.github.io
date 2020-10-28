@@ -1,79 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-      <meta charset="utf-8">
-      <title>Utopian-io | Interactive table with Tabulator JQuery Library</title>
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-      <link href="css/jquery-ui.min.css" rel="stylesheet">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.2/css/tabulator.min.css" rel="stylesheet">
-  </head>
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/get_proposals.css">
+    <script src="/static/js/sorttable.js" type="text/javascript"></script>
 
-<body style="padding-top: 5rem;">
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Utopian-io</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<div class="row">
+    <div class="span12">
+        <h3> Spatial Scan Monitor Summary </h3>
+        <p> Each truncated root will direct to the drift map and 2D light curve
+        results.</p>
+        <table id="myGoTable" class="sortable">
+            <tr class="header">
+                <th> Truncated Root </th>
+                <th> Proposal ID </th>
+                <th> Y Drift </th>
+                <th> X Drift </th>
+                <th> Median Absolute Deviation </th>
+                <th> Percent of Masked Pixels (for Optimal Spectral Extraction) </th>
+                <th> Percent of Masked Pixels (for Regular Spectral Extraction) </th>
+                <th> Scan Rate </th>
+                <th> Scan Type </th>
+                <th> Date </th>
+                <th> Julian Date </th>
+                <th> Target </th>
+            </tr>
+
+            {{ html_table_body|safe }}
+
+        </table>
     </div>
-  </nav>
+</div>
 
-  <main role="main" class="container">
-    <h1>Utopian-io Contributions</h1>
-      <div class="container welcome-div">
-        <div id="utopian-table"></div>
-        <div class="text-center mt-3">
-          <button class="button btn-lg btn-primary" type="type" name="download" id="download-button">Download Data</button>
-        </div>
-    </div>
-  </main>
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.2/js/tabulator.min.js"></script>
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU= crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.2/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.2/js/tabulator.min.js"></script>
-    <script type="text/javascript">
-    $("#utopian-table").tabulator({
-      layout:"fitColumns", //fit columns to width of table (optional)
-      tooltips:true, // set tooltips to true or false
-      pagination:"local", //'local' or 'remote'. local loads all the data and then paginate while remote loads upon ajax call
-      paginationSize:7, // number of rows before applying pagination
-      movableColumns:true, // allows columns to be moved around
-      resizableRows:true, // allows rows to be resize'
-      initialSort:[
-        {column:"Username", dir:"asc"},
-      ],
-        columns:[ //Define Table Columns
-            {title:"Username", field:"name", width:150},
-            {title:"Contribution", field:"np"},
-            {title:"Approval Rate", field:"apr", align:"left", formatter:"progress"},
-            {title:"Total Reward ($)", field:"col"},
-            {title:"Last Contribution", field:"lc", sorter:"date"},
-        ],
-    });
-    //define sample data
-    var tabledata = [
-        {id:1, name:"Aliyu-s", np:"23", apr:"40", col:"123", lc:"20/02/2018"},
-        {id:2, name:"Crypto", np:"3", apr:"3", col:"67", lc:"14/05/2017"},
-        {id:3, name:"Habbuyi", np:"5", apr:"42", col:"47", lc:"22/05/2017"},
-        {id:4, name:"Bright123", np:"7", apr:"125", col:"372.12", lc:"01/08/2017"},
-        {id:5, name:"Marmajuke", np:"9", apr:"12", col:"124.34", lc:"31/01/2018"},
-        {id:8, name:"OliBoy", apr:"12", np:"14", col:"87.3", lc:"12/01/2018"},
-        {id:9, name:"Maryie", apr:"2", np:"19", col:"36.12", lc:"14/05/2017"},
-        {id:10, name:"Christy", np:"6", apr:"42", col:"26.2", lc:"22/10/2017"},
-        {id:11, name:"Philips", np:"12", apr:"125", col:"12.9", lc:"01/08/2017"},
-        {id:12, name:"Margret", np:"3", apr:"16", col:"19.6", lc:"31/01/2018"},
-    ];
-    //load sample data into the table
-      $("#utopian-table").tabulator("setData", tabledata);
-
-      $("#download-button").on("click", function(){
-        $("#utopian-table").tabulator("download", "csv", "Tabulator Sample Download.csv");
-    });
-    </script>
-</body>
-</html>
+{% endblock %}
